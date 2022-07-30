@@ -1,0 +1,165 @@
+/* Table of Content */
+/* ---------------------
+    1. Container for the Main Body
+        - Panel
+        - active
+    2. Add New Photo Btn
+
+----------------------- */
+
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+
+:root {
+    --primary-font: 'Muli', sans-serif;
+    /* Color */
+    --primary-bg-color: #EAF6F6;
+    --secondary-color: #66BFBF;
+
+    /* Text */
+    --primary-text-color: #ffffff;
+    /* Button */
+    --main-btn-color: #FF0063;
+}
+
+* {
+    box-sizing: border-box;
+    font-size: 10px;
+    font-family: var(--primary-font);
+    font-weight: normal;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    /* Color */
+    background-color: var(--primary-bg-color);
+
+    /* Display Properties */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Box-Model */
+    overflow: hidden;
+
+}
+
+label {
+    font-size: 1.6rem;
+}
+
+input {
+    /* Sizing */
+    height: 3rem;
+    width: 40rem;
+
+    padding: .8rem 1.2rem;
+
+    /* Display */
+    display: block;
+    font-size: 1.6rem;
+
+    margin-top: 1rem;
+}
+
+/* 1. Container */
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+.panel {
+    height: 80vh;
+    margin: 1rem;
+    position: relative;
+
+    /* Background */
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    border-radius: 2.8rem;
+    color: var(--primary-text-color);
+    cursor: pointer;
+    flex: 0.5;
+
+    -webkit-transition: flex 0.7s ease-in;
+    transition: flex 0.7s ease-in;
+}
+
+.panel h3 {
+    font-size: 2.4rem;
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    margin: 0;
+    opacity: 0;
+}
+
+.panel.active {
+    flex: 5;
+}
+
+.panel.active h3 {
+    opacity: 1;
+}
+
+@media (max-width:480px) {
+    .container {
+        width: 100%;
+    }
+
+    .panel:nth-child(4),
+    .panel:nth-child(5) {
+        display: none;
+    }
+}
+
+/* Add New Photo Btn */
+.add-Photo-btn {
+    /* Size of the Btn */
+    padding: 1rem 2.5rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 28px;
+    box-shadow: 0 2px 4px #282828;
+
+    /* Btn Text */
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-shadow: 0 0 1px var(--main-btn-color);
+    color: var(--primary-text-color);
+
+
+    /* Color */
+    background: linear-gradient(-45deg, #66BFBF, #FF0063);
+
+    /* Btn Position Properties */
+    position: absolute;
+    bottom: 2rem;
+}
+
+/* adding-photo-link */
+.adding-photo-link {
+    max-width: fit-content;
+    max-height: fit-content;
+    text-align: center;
+
+    /* Sizing */
+    padding: 7rem 5rem;
+
+    /* Color */
+    background-color: var(--primary-bg-color);
+
+
+    /* Position */
+    position: absolute;
+    bottom: 4rem;
+
+    /* Display */
+    display: none;
+
+    /* trnsform */
+    transform: translateY(-50%);
+}
