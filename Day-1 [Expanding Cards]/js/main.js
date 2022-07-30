@@ -1,3 +1,4 @@
+"use strict";
 //DOM addresses:
 const mainContainer = document.getElementById("main-container");
 
@@ -6,7 +7,7 @@ const inputBox = document.getElementById("input-box");
 const inputBtn = document.getElementById("input-btn");
 
 // Variables:
-
+let inputValue;
 
 // Creating an Array for Storing the newly added Photo-Links
 const photosObjectArray = [
@@ -29,9 +30,6 @@ const photosObjectArray = [
 
 let panelCount = photosObjectArray.length;
 
-console.log(panelCount);
-console.log(photosObjectArray);
-
 
 // Initil photos Updation:
 if (mainContainer.children.length === 0) {
@@ -52,19 +50,44 @@ function chengeActiveClass(e) {
 }
 
 
-
 //Opening the Input Box:
 inputBtn.addEventListener("click", () => {
+    // Emptying the Input Field:
+    inputBox.value = "";
     //Displaying the Input Div:
     inputPhotoLinkDiv.style.display = "block";
 })
 
 //Taking the Value of Input Box
-inputPhotoLinkDiv.addEventListener("keydown", function (e) {
+inputPhotoLinkDiv.addEventListener("keydown", photoAddressInput);
+inputPhotoLinkDiv.addEventListener("click", function () {
+    if (inputBox.value) {
+        inputValue = inputBox.value;
+        let inputPhotoName = findTheName(inputValue);
+        const inputObj = {
+            link: inputValue,
+            name: inputPhotoName
+        }
+        photosObjectArray.push(inputObj);
+        // Rendering The Newly added Panels to the Web
+        renderPanels(panelCount);
+        // Updating the PanelCount:
+        panelCount++;
+
+        //Hidding the Display of InputBox:
+        inputPhotoLinkDiv.style.display = "none";
+    }
+    // Emptying the Input Field:
+    inputBox.value = "";
+
+});
+
+// Function for taking Photo Link
+function photoAddressInput(e) {
     if (e.key === "Enter") {
         if (inputBox.value) {
-            let inputValue = inputBox.value;
-            let inputPhotoName = fintTheName(inputValue);
+            inputValue = inputBox.value;
+            let inputPhotoName = findTheName(inputValue);
             const inputObj = {
                 link: inputValue,
                 name: inputPhotoName
@@ -77,14 +100,8 @@ inputPhotoLinkDiv.addEventListener("keydown", function (e) {
         }
         //Hidding the Display of InputBox:
         inputPhotoLinkDiv.style.display = "none";
-
     }
-})
-
-
-
-
-
+}
 
 // Function to render the Links to the HTML Page:
 function renderLinks(link, name) {
@@ -106,7 +123,17 @@ function renderPanels(initialValue = 0) {
 }
 
 //Function for finding the name of the Photo automatically:
+function findTheName(PhotoName) {
+    let firsSegment = PhotoName.lastIndexOf("/");
+    let lastSegment = PhotoName.lastIndexOf("-");
 
-function fintTheName(PhotoName) {
+    let name = PhotoName.slice(firsSegment + 1, lastSegment);
 
+    return name.toUpperCase();
+}
+
+// Function for Cross-Btn:
+function crossBtn() {
+    //Clossing the Input Div:
+    inputPhotoLinkDiv.style.display = "none";
 }
